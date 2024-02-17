@@ -22,9 +22,4 @@
     android:name="com.example.bottomnavtest.ui.notifications.NotificationsFragment"
     android:label="@string/title_notifications"
     tools:layout="@layout/fragment_notifications" />
-
-  <fragment
-    android:id="@+id/cockpit_frag"
-    android:name="com.axiomc.sdk.fragments.cockpit.CockpitFrag"
-    />
 </navigation>

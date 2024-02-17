@@ -67,7 +67,5 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
-  implementation(libs.sdk.test) {
-    exclude(group = "com.android.support", module = "support-compat")
-  }
+  implementation(libs.sdk.test)
 }
