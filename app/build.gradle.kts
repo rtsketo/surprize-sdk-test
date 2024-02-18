@@ -10,7 +10,7 @@ android {
   defaultConfig {
     applicationId = "com.example.bottomnavtest"
     minSdk = 24
-    targetSdk = 34
+    targetSdk = 33
     versionCode = 1
     versionName = "1.0"
 
@@ -19,36 +19,39 @@ android {
 
   buildTypes {
     release {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      isMinifyEnabled = true
+      isShrinkResources = true
+      proguardFiles(getDefaultProguardFile(
+        "proguard-android-optimize.txt"),
+        "proguard-rules.pro")
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
-  packaging {
-    pickFirst("META-INF/LICENSE.txt")
-    pickFirst("META-INF/LICENSE")
-    pickFirst("lib/armeabi-v7a/libRSSupport.so")
-    pickFirst("lib/x86_64/libRSSupport.so")
-    pickFirst("lib/x86/libRSSupport.so")
-    pickFirst("lib/arm64-v8a/libRSSupport.so")
-    pickFirst("META-INF/androidx.*")
 
+  packagingOptions {
     // Exclude these files
-    exclude("META-INF/license")
-    exclude("META-INF/License")
     exclude("META-INF/NOTICE.txt")
     exclude("guardit4j.fin")
+
     //LoyalKit
     resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
-    jniLibs.pickFirsts += setOf("**/librsjni_androidx.so", "**/libRSSupport.so", "**/librsjni.so")
+    jniLibs.pickFirsts += setOf(
+      "**/librsjni_androidx.so",
+      "META-INF/androidx.*",
+      "**/libRSSupport.so",
+      "**/librsjni.so"
+    )
   }
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }
+
   kotlinOptions {
     jvmTarget = "1.8"
   }
+
   buildFeatures {
     viewBinding = true
   }
