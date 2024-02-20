@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.axiomc.sdk.CockpitServers
-import com.axiomc.sdk.CockpitSession
-import com.axiomc.sdk.LoyalHelper.loadLoyalHub
+import com.axiomc.sdk.LoyalKit
+import com.axiomc.sdk.LoyalKit.loadLoyalHubAsChild
+import com.axiomc.sdk.LoyalSession
 import com.example.bottomnavtest.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -24,17 +24,24 @@ class DashboardFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View {
 
+    // ----------------------------------
+    // These can be assigned at any point,
+    // but always before loading the hub.
+    LoyalKit.onBalance = { }
+    LoyalKit.onExpiration = { }
+    LoyalKit.session = LoyalSession("", "65849017", listOf())
+    // ----------------------------------
+
     _binding = FragmentDashboardBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    if (savedInstanceState == null) {
-      loadLoyalHub(
-        binding.root.id,
-        session = CockpitSession("", "65849017", listOf(), {}, {}),
-        servers = CockpitServers.AXIOM
-      )
-    }
     return root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    if (savedInstanceState == null /* || session has changed */)
+      loadLoyalHubAsChild(binding.root.id)
   }
 
   override fun onDestroyView() {

@@ -1,13 +1,15 @@
 package com.example.bottomnavtest
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.axiomc.sdk.LoyalKit.initLoyalKit
+import com.axiomc.sdk.LoyalServers.AXIOM
 import com.example.bottomnavtest.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,8 +18,13 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    // This needs to be called
+    // as early as possible.
+    initLoyalKit(AXIOM)
+
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
 
     val navView: BottomNavigationView = binding.navView
 
