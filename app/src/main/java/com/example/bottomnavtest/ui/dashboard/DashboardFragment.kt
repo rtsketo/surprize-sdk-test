@@ -35,10 +35,13 @@ class DashboardFragment : Fragment() {
     _binding = FragmentDashboardBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
+    return root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     if (savedInstanceState == null /* || session has changed */)
       loadLoyalHubAsChild(binding.root.id)
-
-    return root
   }
 
   override fun onDestroyView() {
