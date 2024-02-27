@@ -12,7 +12,7 @@ lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
-sdkTest = "0.1.314"
+sdkTest = "0.1.521"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

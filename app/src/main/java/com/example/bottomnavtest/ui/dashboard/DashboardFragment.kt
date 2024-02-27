@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.axiomc.sdk.LoyalKit
+import com.axiomc.sdk.LoyalKit.ThemeMode.LIGHT
 import com.axiomc.sdk.LoyalKit.loadLoyalHubAsChild
 import com.axiomc.sdk.LoyalSession
 import com.example.bottomnavtest.databinding.FragmentDashboardBinding
@@ -23,25 +24,32 @@ class DashboardFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
+    println("LoyalKit version: ${ LoyalKit.version }")
+
+    // Theme it's better to be called before
+    // launching the LoyalHub, but it can
+    // be changed dynamically as well along
+    // with the theme of the displayed views.
+    LoyalKit.theme = LIGHT
 
     // ----------------------------------
     // These can be assigned at any point,
     // but always before loading the hub.
     LoyalKit.onBalance = { }
     LoyalKit.onExpiration = { }
+
     LoyalKit.session = LoyalSession("", "65849017", listOf())
     // ----------------------------------
 
     _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-    val root: View = binding.root
 
-    return root
+    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     if (savedInstanceState == null /* || session has changed */)
-      loadLoyalHubAsChild(binding.root.id)
+      loadLoyalHubAsChild(view.id)
   }
 
   override fun onDestroyView() {
