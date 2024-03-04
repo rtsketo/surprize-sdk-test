@@ -31,12 +31,12 @@ android {
   }
 
   packagingOptions {
+    resources {
+      excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/NOTICE.txt", "guardit4j.fin")
+    }
     // Exclude these files
-    exclude("META-INF/NOTICE.txt")
-    exclude("guardit4j.fin")
 
     //LoyalKit
-    resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
     jniLibs.pickFirsts += setOf(
       "**/librsjni_androidx.so",
       "META-INF/androidx.*",
@@ -51,7 +51,7 @@ android {
   }
 
   kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
   }
 
   buildFeatures {
