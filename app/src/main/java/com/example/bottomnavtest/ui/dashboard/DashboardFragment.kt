@@ -38,7 +38,7 @@ class DashboardFragment : Fragment() {
     // launching the LoyalHub, but it can
     // be changed dynamically as well along
     // with the theme of the displayed views.
-    LoyalKit.theme = DARK
+    LoyalKit.theme = LIGHT
 
     // ----------------------------------
     // These can be assigned at any point,
